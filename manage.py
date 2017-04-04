@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import request
 
+from handler import recived_mesagge
+
 import json
 from config import DevelopmentConfig
 
@@ -20,8 +22,7 @@ def webhook():
         for page_entry in data['entry']:
             for message_event in page_entry['messaging']:
                 if 'message' in message_event:
-                    evento = message_event['message']
-                    print(evento['text'])
+                    recived_mesagge(message_event)
         return 'ok'
 
 @app.route("/", methods = ['GET'])
